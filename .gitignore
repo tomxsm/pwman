@@ -1,0 +1,24 @@
+# Your vault: encrypted passwords and the salt. NEVER commit these.
+vault/
+*.db
+*.sqlite
+*.sqlite3
+salt.bin
+
+# Python virtual environment
+venv/
+.venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# PyInstaller output (when you package the .exe)
+build/
+dist/
+
+# Editor and OS files
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
