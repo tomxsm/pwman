@@ -1,4 +1,5 @@
 """CustomTkinter interface: unlock screen + main vault screen."""
+import sys
 import tkinter as tk
 from tkinter import messagebox
 
@@ -20,6 +21,7 @@ class App(ctk.CTk):
         self.title("PwMan")
         self.geometry("460x640")
         self.minsize(420, 540)
+        self.set_window_icon()
 
         self.fernet = None
         self._clear_job = None
@@ -30,6 +32,20 @@ class App(ctk.CTk):
         self.show_login()
 
     # ------------------------------------------------------------------ utils
+    def set_window_icon(self):
+        if sys.platform != "win32" or not config.ICON_PATH.exists():
+            return
+
+        def apply():
+            try:
+                self.iconbitmap(str(config.ICON_PATH))
+            except tk.TclError:
+                pass
+
+        # CustomTkinter sets its own default icon ~200 ms after startup,
+        # so we set ours slightly later to override it.
+        self.after(250, apply)
+
     def _reset(self):
         for w in self.winfo_children():
             w.destroy()

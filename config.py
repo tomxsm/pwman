@@ -8,6 +8,14 @@ if getattr(sys, "frozen", False):
 else:
     APP_DIR = Path(__file__).resolve().parent
 
+def resource_path(name: str) -> Path:
+    """Path to a bundled file (works from source and inside a PyInstaller .exe)."""
+    base = Path(getattr(sys, "_MEIPASS", Path(__file__).resolve().parent))
+    return base / name
+
+
+ICON_PATH = resource_path("pwman.ico")
+
 DATA_DIR = APP_DIR / "vault"
 DATA_DIR.mkdir(exist_ok=True)
 
